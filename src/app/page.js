@@ -7,22 +7,26 @@ export default function Home() {
   const [adPlaying, setAdPlaying] = useState(false);
   var count = 1;
 
+  const switchVideoSource = () => {
+    if (videoRef) {
+      count += 1;
+      if (count > 7) {
+        count = 1;
+      }
+      console.log("JODDD", count);
+      const video = videoRef.current;
+      video.src = `assets/videos/Video${count}.mp4`;
+    }
+  };
+
   useEffect(() => {
     const video = videoRef.current;
     video.src = "assets/videos/Video1.mp4";
 
-    const switchTimer = setTimeout(() => {
-      console.log("JODDD DHHDWD");
-      if (videoRef) {
-        count += 1;
-        console.log("JODDD", count);
-        const video = videoRef.current;
-        video.src = `assets/videos/Video${count}.mp4`;
-      }
-    }, 10000); // Switch video source after 10 seconds
+    const switchTimer = setInterval(switchVideoSource, 10000); // Switch video source after 10 seconds
 
     return () => {
-      clearTimeout(switchTimer);
+      clearInterval(switchTimer);
     };
   }, []);
 
