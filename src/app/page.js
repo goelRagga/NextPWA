@@ -22,6 +22,7 @@ export default function Home() {
   useEffect(() => {
     const video = videoRef.current;
     video.src = "assets/videos/Video1.mp4";
+    video.play();
 
     const switchTimer = setInterval(switchVideoSource, 10000); // Switch video source after 10 seconds
 
